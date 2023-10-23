@@ -131,9 +131,9 @@ UdpProxy.prototype.handleMessage = function handleMessage(socket, proxy, msg, se
     proxy.emit('message', msg, sender);
     socket.send(msg, 0, msg.length, proxy.port, proxy.host, function (err, bytes) {
         if (err) proxy.emit('proxyError', err);
-        if (!socket.t) socket.t = setTimeout(function () {
-            socket.close();
-        }, proxy.tOutTime);
+        //if (!socket.t) socket.t = setTimeout(function () {
+        //    socket.close();
+        //}, proxy.tOutTime);
     });
 };
 
