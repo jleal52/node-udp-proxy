@@ -10,6 +10,7 @@ var UdpProxy = function (options) {
     var serverPort = options.localport || 0;
     var serverHost = options.localaddress || '0.0.0.0';
     var proxyHost = options.proxyaddress || '0.0.0.0';
+    var proxyPort = options.proxyport || 0;
     this.tOutTime = options.timeOutTime || 10000;
     this.family = 'IPv4';
     this.udpType = 'udp4';
@@ -42,7 +43,7 @@ var UdpProxy = function (options) {
         });
     }).on('message', function (msg, sender) {
         var client = proxy.createClient(msg, sender);
-        if (!client._bound) client.bind(0, proxyHost);
+        if (!client._bound) client.bind(proxyPort, proxyHost);
         else client.emit('send', msg, sender);
     }).on('error', function (err) {
         this.close();
